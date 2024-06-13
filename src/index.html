@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mentor Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+</head>
+<body>
+  <h1>Mentor Platform</h1>
+
+  <!-- Mentor Registration Section -->
+  <section id="register-section">
+    <h2>Mentor Registration</h2>
+    <form id="register-form">
+      <label for="register-email">Email:</label>
+      <input type="email" id="register-email" required><br>
+      
+      <label for="register-password">Password:</label>
+      <input type="password" id="register-password" required><br>
+      
+      <button type="submit">Register</button>
+    </form>
+  </section>
+
+  <!-- Mentor Login Section -->
+  <section id="login-section">
+    <h2>Mentor Login</h2>
+    <form id="login-form">
+      <label for="login-email">Email:</label>
+      <input type="email" id="login-email" required><br>
+      
+      <label for="login-password">Password:</label>
+      <input type="password" id="login-password" required><br>
+      
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <!-- Mentor Personal Page -->
+  <section id="mentor-section" style="display:none;">
+    <h2>Mentor Profile</h2>
+    <form id="mentor-form">
+      <label for="mentor-email">Email:</label>
+      <input type="email" id="mentor-email" required disabled><br>
+      
+      <label for="mentor-nickname">Nickname:</label>
+      <input type="text" id="mentor-nickname" required><br>
+      
+      <label for="mentor-skills">Skills:</label>
+      <select id="mentor-skills" multiple required>
+        <option value="Career Advice">Career Advice</option>
+        <option value="Emotional Support">Emotional Support</option>
+        <option value="Exam Tips">Exam Tips</option>
+        <option value="Financial Advice">Financial Advice</option>
+        <option value="Study or Traveling Abroad">Study or Traveling Abroad</option>
+      </select><br>
+      
+      <label for="mentor-availability-date">Availability Date:</label>
+      <input type="text" id="mentor-availability-date" class="flatpickr-date" placeholder="Select Date" required><br>
+      
+      <label for="mentor-availability-time">Availability Time:</label>
+      <select id="mentor-availability-time" required>
+        <option value="00:00">00:00</option>
+        <option value="01:00">01:00</option>
+        <option value="02:00">02:00</option>
+        <option value="03:00">03:00</option>
+        <option value="04:00">04:00</option>
+        <option value="05:00">05:00</option>
+        <option value="06:00">06:00</option>
+        <option value="07:00">07:00</option>
+        <option value="08:00">08:00</option>
+        <option value="09:00">09:00</option>
+        <option value="10:00">10:00</option>
+        <option value="11:00">11:00</option>
+        <option value="12:00">12:00</option>
+        <option value="13:00">13:00</option>
+        <option value="14:00">14:00</option>
+        <option value="15:00">15:00</option>
+        <option value="16:00">16:00</option>
+        <option value="17:00">17:00</option>
+        <option value="18:00">18:00</option>
+        <option value="19:00">19:00</option>
+        <option value="20:00">20:00</option>
+        <option value="21:00">21:00</option>
+        <option value="22:00">22:00</option>
+        <option value="23:00">23:00</option>
+      </select><br>
+      
+      <label for="mentor-description">Description:</label>
+      <textarea id="mentor-description" required></textarea><br>
+      
+      <button type="submit">Submit</button>
+    </form>
+
+    <h3>Your Ratings</h3>
+    <div id="mentor-ratings"></div>
+  </section>
+
+  <section id="student-section">
+    <h2>Find a Mentor</h2>
+    <label for="skill-select">Select a Skill:</label>
+    <select id="skill-select">
+      <option value="">--Please choose an option--</option>
+      <option value="Career Advice">Career Advice</option>
+      <option value="Emotional Support">Emotional Support</option>
+      <option value="Exam Tips">Exam Tips</option>
+      <option value="Financial Advice">Financial Advice</option>
+      <option value="Study or Traveling Abroad">Study or Traveling Abroad</option>
+    </select>
+    
+    <h3>Available Mentors:</h3>
+    <div id="mentor-list"></div>
+    
+    <h3>Bid for a Mentor</h3>
+    <form id="student-form" style="display:none;">
+      <label for="student-email">Email:</label>
+      <input type="email" id="student-email" required><br>
+      
+      <label for="student-nickname">Nickname:</label>
+      <input type="text" id="student-nickname" required><br>
+      
+      <label for="student-bid">Your Bid (per hour):</label>
+      <input type="number" id="student-bid" required><br>
+      
+      <label for="selected-mentor">Selected Mentor:</label>
+      <input type="text" id="selected-mentor" readonly><br>
+      
+      <button type="submit">Submit</button>
+    </form>
+
+    <h3>Rate Your Mentor</h3>
+    <form id="rating-form" style="display:none;">
+      <label for="rating-email">Your Email:</label>
+      <input type="email" id="rating-email" required><br>
+
+      <label for="rating-mentor">Mentor Nickname:</label>
+      <input type="text" id="rating-mentor" required readonly><br>
+
+      <label for="mentor-rating">Rating (1 to 5):</label>
+      <select id="mentor-rating" required>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select><br>
+
+      <button type="submit">Submit Rating</button>
+    </form>
+  </section>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.9/flatpickr.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script type="text/javascript">
+    emailjs.init("-Nnye-I5IPyx80PCc");
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, query, where, getDocs, getDoc, updateDoc, doc, arrayUnion } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCFsakgiHc2yClNrWRKE7NYWWTNUeQ8tH4",
+      authDomain: "mentor-571f7.firebaseapp.com",
+      projectId: "mentor-571f7",
+      storageBucket: "mentor-571f7.appspot.com",
+      messagingSenderId: "664402415394",
+      appId: "1:664402415394:web:d95238cbfa5b4f712adf7b"
+      };
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    flatpickr(".flatpickr-date", {
+      dateFormat: "Y-m-d"
+    });
+
+    $(document).ready(function() {
+      $('#mentor-skills').select2({
+        width: '100%'
+      });
+    });
+
+// 註冊新用戶
+document.getElementById('register-form').addEventListener('submit', async function(event){
+  event.preventDefault();
+  const email = document.getElementById('register-email').value;
+  const password = document.getElementById('register-password').value;
+
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    alert('Account created successfully. Please log in.');
+  } catch (error) {
+    console.error('Account creation failed:', error.code, error.message);
+  }
+});
+
+// 用戶登錄
+document.getElementById('login-form').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    document.getElementById('login-section').style.display = 'none';
+    document.getElementById('mentor-section').style.display = 'block';
+    document.getElementById('mentor-email').value = user.email;
+    loadMentorProfile(user.uid);
+  } catch (error) {
+    console.error('Login failed:', error.code, error.message);
+  }
+});
+
+async function loadMentorProfile(uid) {
+  const mentorQuery = query(collection(db, 'mentors'), where('email', '==', auth.currentUser.email));
+  const mentorSnapshot = await getDocs(mentorQuery);
+  if (!mentorSnapshot.empty) {
+    const mentorDoc = mentorSnapshot.docs[0];
+    const mentorData = mentorDoc.data();
+    document.getElementById('mentor-nickname').value = mentorData.nickname;
+    document.getElementById('mentor-description').value = mentorData.description;
+    const skillsSelect = document.getElementById('mentor-skills');
+    for (const option of skillsSelect.options) {
+      option.selected = mentorData.skills.includes(option.value);
+    }
+    displayRatings(mentorData.ratings);
+  }
+}
+
+document.getElementById('mentor-form').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('mentor-email').value;
+  const nickname = document.getElementById('mentor-nickname').value;
+  const skillsSelect = document.getElementById('mentor-skills');
+  const skills = Array.from(skillsSelect.selectedOptions).map(option => option.value);
+  const date = document.getElementById('mentor-availability-date').value;
+  const time = document.getElementById('mentor-availability-time').value;
+  const availability = `${date} ${time}`;
+  const description = document.getElementById('mentor-description').value;
+  const timestamp = new Date();
+
+  try {
+    const mentorQuery = query(collection(db, 'mentors'), where('email', '==', email));
+    const mentorSnapshot = await getDocs(mentorQuery);
+
+    let docRef;
+
+    if (mentorSnapshot.empty) {
+      docRef = await addDoc(collection(db, 'mentors'), {
+        email: email,
+        nickname: nickname,
+        skills: skills,
+        availability: availability,
+        description: description,
+        timestamp: timestamp,
+        bids: [],
+        ratings: [],
+        active: true
+      });
+    } else {
+      const mentorDoc = mentorSnapshot.docs[0];
+      docRef = doc(db, 'mentors', mentorDoc.id);
+      await updateDoc(docRef, {
+        nickname: nickname,
+        skills: skills,
+        availability: availability,
+        description: description,
+        timestamp: timestamp,
+        active: true
+      });
+    }
+
+    console.log('Mentor added/updated successfully:', docRef.id);
+
+    setTimeout(async () => {
+      const mentorDoc = await getDoc(docRef);
+      const mentorData = mentorDoc.data();
+      if (mentorData.bids.length > 0) {
+        const highestBid = mentorData.bids.reduce((max, bid) => bid.bid > max.bid ? bid : max, mentorData.bids[0]);
+        sendEmail(mentorData.email, nickname, highestBid.nickname, highestBid.bid);
+        sendEmail(highestBid.email, highestBid.nickname, nickname, highestBid.bid);
+      }
+
+      await updateDoc(docRef, {
+        active: false
+      });
+
+      console.log('Mentor deactivated after 3 minutes:', docRef.id);
+    }, 3 * 60 * 1000); // 3 minutes in milliseconds
+
+    alert('Mentor added/updated successfully');
+    document.getElementById('mentor-form').reset();
+  } catch (error) {
+    console.error('Error adding/updating mentor:', error);
+  }
+});
+
+function sendEmail(to_email, to_name, student_nickname, bid) {
+  emailjs.send("service_3xv85hv", "template_i7j0jkb", {
+      to_email: to_email,
+      to_name: to_name,
+      student_nickname: student_nickname,
+      bid: bid
+  }).then((response) => {
+      console.log('Email sent successfully!', response.status, response.text);
+  }).catch((error) => {
+      console.error('Failed to send email', error);
+  });
+}
+
+async function displayMatchingMentors(skill) {
+  const mentorList = document.getElementById('mentor-list');
+  mentorList.innerHTML = '';
+
+  try {
+    const q = query(collection(db, 'mentors'), where('skills', 'array-contains', skill), where('active', '==', true));
+    const querySnapshot = await getDocs(q);
+    if (querySnapshot.empty) {
+      mentorList.innerHTML = '<p>No mentors found for the selected skill.</p>';
+    } else {
+      querySnapshot.forEach((doc) => {
+        const mentor = doc.data();
+        const bids = mentor.bids.map(bid => `<li>${bid.nickname}: $${bid.bid}</li>`).join('');
+        const ratings = mentor.ratings.length > 0 ? (mentor.ratings.reduce((a, b) => a + b, 0) / mentor.ratings.length).toFixed(2) : "No ratings yet";
+        const mentorDiv = document.createElement('div');
+        mentorDiv.innerHTML = `<strong>${mentor.nickname}</strong><br>Skills: ${mentor.skills.join(', ')}<br>Description: ${mentor.description}<br>Availability: ${mentor.availability}<br>Bids:<ul>${bids}</ul><br>Rating: ${ratings}<br><button onclick="selectMentor('${doc.id}', '${mentor.nickname}')">Select Mentor</button>`;
+        mentorList.appendChild(mentorDiv);
+      });
+    }
+  } catch (error) {
+    console.error('Error fetching mentors:', error);
+    mentorList.innerHTML = '<p>Error fetching mentors. Please try again later.</p>';
+  }
+}
+
+document.getElementById('skill-select').addEventListener('change', function() {
+  const selectedSkill = this.value;
+  if (selectedSkill) {
+    displayMatchingMentors(selectedSkill);
+  }
+});
+
+window.selectMentor = function(mentorId, mentorNickname) {
+  document.getElementById('selected-mentor').value = mentorNickname;
+  document.getElementById('student-form').style.display = 'block';
+  document.getElementById('rating-mentor').value = mentorNickname;
+  document.getElementById('rating-form').style.display = 'block';
+};
+
+document.getElementById('student-form').addEventListener('submit', async function(event) {
+  event.preventDefault();
+
+  const email = document.getElementById('student-email').value;
+  const nickname = document.getElementById('student-nickname').value;
+  const bid = parseFloat(document.getElementById('student-bid').value);
+  const selectedMentor = document.getElementById('selected-mentor').value;
+
+  try {
+    const mentorQuery = query(collection(db, 'mentors'), where('nickname', '==', selectedMentor));
+    const mentorSnapshot = await getDocs(mentorQuery);
+
+    if (!mentorSnapshot.empty) {
+      const mentorDoc = mentorSnapshot.docs[0];
+      const mentorRef = doc(db, 'mentors', mentorDoc.id);
+
+      await updateDoc(mentorRef, {
+        bids: arrayUnion({ email: email, nickname: nickname, bid: bid })
+      });
+
+      alert('Bid submitted successfully.');
+      document.getElementById('student-form').reset();
+      document.getElementById('student-form').style.display = 'none';
+    } else {
+      console.error('No mentor found with the given nickname.');
+    }
+  } catch (error) {
+    console.error('Error submitting bid:', error);
+  }
+});
+
+document.getElementById('rating-form').addEventListener('submit', async function(event) {
+event.preventDefault();
+    const email = document.getElementById('rating-email').value;
+  const mentorNickname = document.getElementById('rating-mentor').value;
+  const rating = parseInt(document.getElementById('mentor-rating').value);
+
+  try {
+    const mentorQuery = query(collection(db, 'mentors'), where('nickname', '==', mentorNickname));
+    const mentorSnapshot = await getDocs(mentorQuery);
+
+    if (!mentorSnapshot.empty) {
+      const mentorDoc = mentorSnapshot.docs[0];
+      const mentorRef = doc(db, 'mentors', mentorDoc.id);
+
+      await updateDoc(mentorRef, {
+        ratings: arrayUnion(rating)
+      });
+
+      alert('Rating submitted successfully.');
+      document.getElementById('rating-form').reset();
+      document.getElementById('rating-form').style.display = 'none';
+    } else {
+      console.error('No mentor found with the given nickname.');
+    }
+  } catch (error) {
+    console.error('Error submitting rating:', error);
+  }
+});
+    </script>
+</body>
+</html>
